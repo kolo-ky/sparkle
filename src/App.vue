@@ -1,15 +1,18 @@
 <template lang="pug">
-  .wrapper
-    #ap
-      h1 Hello
+      page-layout
 </template>
 
 <script>
+import PageLayout from '@/views/layouts/PageLayout'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    PageLayout
+  }
 }
 </script>
 
 <style lang="stylus">
-
+  @import '~vuetify/src/stylus/main'
 </style>
