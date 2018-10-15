@@ -1,9 +1,9 @@
 <template lang="pug">
-      page-layout
+   page-layout
 </template>
 
 <script>
-import PageLayout from '@/views/layouts/PageLayout'
+import PageLayout from '@/views/layouts/pageLayout/PageLayout'
 
 export default {
   name: 'App',

@@ -7,7 +7,7 @@
       v-for="item in menu"
       :key="item.url"
     )
-        v-btn(flat='' :to='item.url') {{item.title}}
+        v-btn(flat='' :to='item.url' router="") {{item.title}}
 </template>
 
 <script>

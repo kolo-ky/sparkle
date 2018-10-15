@@ -1,0 +1,12 @@
+<template lang="pug">
+    h1 Events
+</template>
+
+<script>
+export default {
+  name: 'Events',
+  created () {
+    console.log(1)
+  }
+}
+</script>
