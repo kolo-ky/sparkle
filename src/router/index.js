@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Events from '@/views/pages/Events'
-import CreateEvent from '@/views/pages/CreateEvent'
-import Profile from '@/views/pages/Profile'
+const Events = () => import('@/views/pages/Events')
+const CreateEvent = () => import('@/views/pages/CreateEvent')
+const Profile = () => import('@/views/pages/Profile')
 
 Vue.use(VueRouter)
 
