@@ -7,25 +7,30 @@ const Profile = () => import('@/views/pages/Profile')
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '',
-    redirect: {name: 'events'}
-  },
+export const routes = [
   {
     name: 'events',
     path: '/',
-    component: Events
+    component: Events,
+    meta: {
+      title: 'События'
+    }
   },
   {
     path: '/create-event',
     component: CreateEvent,
-    props: true
+    props: true,
+    meta: {
+      title: 'Создать событие'
+    }
   },
   {
     path: '/profile',
     component: Profile,
-    props: true
+    props: true,
+    meta: {
+      title: 'Профиль'
+    }
   }
 ]
 

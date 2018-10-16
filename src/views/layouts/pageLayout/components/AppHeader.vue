@@ -5,31 +5,19 @@
     v-spacer
     v-toolbar-items.hidden-sm-and-down(
       v-for="item in menu"
-      :key="item.url"
+      :key="item.path"
     )
-        v-btn(flat='' :to='item.url' router="") {{item.title}}
+        v-btn(flat='' :to='item.path' router="") {{item.meta.title}}
 </template>
 
 <script>
+import {routes} from '@/router/'
 
 export default {
   name: 'AppHeader',
   data () {
     return {
-      menu: [
-        {
-          title: 'События',
-          url: '/'
-        },
-        {
-          title: 'Создать событие',
-          url: '/create-event'
-        },
-        {
-          title: 'Профиль',
-          url: '/profile'
-        }
-      ]
+      menu: routes
     }
   }
 }

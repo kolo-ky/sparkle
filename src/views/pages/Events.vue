@@ -4,9 +4,6 @@
 
 <script>
 export default {
-  name: 'Events',
-  created () {
-    console.log(1)
-  }
+  name: 'Events'
 }
 </script>
