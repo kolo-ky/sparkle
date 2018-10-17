@@ -11,9 +11,11 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "firebase": "^5.5.4",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.2.9"
+    "vuetify": "^1.2.9",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

@@ -4,6 +4,12 @@
 
 ## Build Setup
 
+Для того, чтобы приложение запустилось с firebase - необходимо зарегестрироваться в firebase
+и получить настройки конфигурации. В папке firebase создать папку config, поместить туда файл
+index.js, вставив в него конфигурацию
+
+export const config = {}
+
 ``` bash
 # install dependencies
 npm install
