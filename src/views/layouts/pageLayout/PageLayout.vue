@@ -3,8 +3,7 @@
     app-header
     v-content
       v-container(fill-height='')
-          v-layout
-            router-view
+        router-view
     app-footer
 </template>
 

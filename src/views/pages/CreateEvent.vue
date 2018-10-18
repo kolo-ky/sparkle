@@ -1,4 +1,5 @@
 <template lang="pug">
+  v-layout
     h1 CreateEvent
 </template>
 

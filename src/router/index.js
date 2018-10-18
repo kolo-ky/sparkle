@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 const Events = () => import('@/views/pages/Events')
 const CreateEvent = () => import('@/views/pages/CreateEvent')
 const Profile = () => import('@/views/pages/Profile')
+const Login = () => import('@/views/pages/Login')
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,14 @@ export const routes = [
     props: true,
     meta: {
       title: 'Профиль'
+    }
+  },
+  {
+    path: '/login',
+    component: Login,
+    props: true,
+    meta: {
+      title: 'Логин'
     }
   }
 ]
