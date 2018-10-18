@@ -3,33 +3,35 @@ v-layout(align-center='', justify-center='')
   v-flex(xs12='', sm8='', md4='')
     v-card.elevation-12
       v-toolbar(dark='', color='red')
-        v-toolbar-title Вход
+        v-toolbar-title Регистрация
         v-spacer
       v-card-text
         v-form
           v-text-field(prepend-icon='person', name='login', label='Логин', type='text' v-model="username")
           v-text-field#password(prepend-icon='lock', name='password', label='Пароль', type='password' v-model="password")
+          v-text-field#confirmPassword(prepend-icon='lock', name='confirmPassword', label='Подтверждение пароля', type='password' v-model="confirmPassword")
       v-card-actions
         v-spacer
-        v-btn(color='red' @click="login") Войти
+        v-btn(color='red' @click="onSignUp") Войти
 </template>
 
 <script>
-import {signIn} from '@/db/firebase/auth'
+import {signUp} from '@/db/firebase/auth'
 
 export default {
-  name: 'Login',
+  name: 'Registration',
   data () {
     return {
       username: '',
-      password: ''
+      password: '',
+      confirmPassword: ''
     }
   },
   methods: {
-    login () {
+    onSignUp () {
       const {username, password} = this
-      signIn(username, password).then(response => {
-        console.log('authorization was successful', response)
+      signUp(username, password).then(() => {
+        this.$router.push('/sign-in')
       }).catch(error => console.log(error))
     }
   }

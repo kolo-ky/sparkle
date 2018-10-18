@@ -5,6 +5,7 @@ import App from './App'
 import {router} from './router/'
 import Vuetify from 'vuetify'
 import {store} from './store'
+import {firebaseApp} from './db/firebase/'
 
 Vue.use(Vuetify)
 Vue.config.productionTip = false
@@ -14,5 +15,6 @@ new Vue({
   el: '#app',
   router,
   store,
+  firebaseApp,
   render: h => h(App)
 })

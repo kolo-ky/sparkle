@@ -5,6 +5,7 @@ const Events = () => import('@/views/pages/Events')
 const CreateEvent = () => import('@/views/pages/CreateEvent')
 const Profile = () => import('@/views/pages/Profile')
 const Login = () => import('@/views/pages/Login')
+const Registration = () => import('@/views/pages/Registration')
 
 Vue.use(VueRouter)
 
@@ -34,7 +35,15 @@ export const routes = [
     }
   },
   {
-    path: '/login',
+    path: '/sign-up',
+    component: Registration,
+    props: true,
+    meta: {
+      title: 'Регистрация'
+    }
+  },
+  {
+    path: '/sign-in',
     component: Login,
     props: true,
     meta: {
