@@ -1,9 +1,13 @@
 export default {
   namespaced: true,
   state: {
-    current: null
+    status: '',
+    profile: {}
   },
-  getters: { },
-  mutations: { },
-  actions: { }
+  getters: {
+    getProfile: state => state.profile,
+    isProfileLoaded: state => !!state.profile.name
+  },
+  actions: { },
+  mutations: { }
 }

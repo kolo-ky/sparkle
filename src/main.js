@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import {router} from './router/'
 import Vuetify from 'vuetify'
-import {store} from './store'
+import {store} from './store/'
 import {firebaseApp} from './db/firebase/'
 
 Vue.use(Vuetify)
