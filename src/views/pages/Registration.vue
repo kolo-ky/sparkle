@@ -12,7 +12,7 @@ v-layout(align-center='', justify-center='')
           v-text-field#confirmPassword(prepend-icon='lock', name='confirmPassword', label='Подтверждение пароля', type='password' v-model="confirmPassword")
       v-card-actions
         v-spacer
-        v-btn(color='red' @click="onSignUp") Войти
+        v-btn(color='red' @click="onSignUp") Зарегестрироваться
 </template>
 
 <script>
