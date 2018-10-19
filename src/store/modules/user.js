@@ -25,7 +25,7 @@ export default {
           // if resp is unauthorized, logout, to
           dispatch(AUTH_LOGOUT)
         })
-    },
+    }
   },
   mutations: {
     [USER_REQUEST]: (state) => {

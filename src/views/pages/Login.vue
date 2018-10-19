@@ -15,7 +15,7 @@ v-layout(align-center='', justify-center='')
 </template>
 
 <script>
-import {signIn} from '@/db/firebase/auth'
+import {AUTH_REQUEST} from '@/store/actions/auth'
 
 export default {
   name: 'Login',

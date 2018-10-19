@@ -15,7 +15,8 @@ export const routes = [
     path: '/',
     component: Events,
     meta: {
-      title: 'События'
+      title: 'События',
+      auth: false
     }
   },
   {
@@ -23,7 +24,8 @@ export const routes = [
     component: CreateEvent,
     props: true,
     meta: {
-      title: 'Создать событие'
+      title: 'Создать событие',
+      auth: true
     }
   },
   {
@@ -31,7 +33,8 @@ export const routes = [
     component: Profile,
     props: true,
     meta: {
-      title: 'Профиль'
+      title: 'Профиль',
+      auth: true
     }
   },
   {
@@ -39,7 +42,8 @@ export const routes = [
     component: Registration,
     props: true,
     meta: {
-      title: 'Регистрация'
+      title: 'Регистрация',
+      auth: false
     }
   },
   {
@@ -47,7 +51,8 @@ export const routes = [
     component: Login,
     props: true,
     meta: {
-      title: 'Логин'
+      title: 'Логин',
+      auth: false
     }
   }
 ]
