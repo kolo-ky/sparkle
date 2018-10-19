@@ -17,7 +17,7 @@ export default {
     [AUTH_REQUEST]: ({commit, dispatch}, user) => {
       return new Promise((resolve, reject) => {
         commit(AUTH_REQUEST)
-        signIn(user.name, user.password)
+        signIn(user.username, user.password)
           .then(response => {
             localStorage.setItem('user-token', response.token)
             commit(AUTH_SUCCESS, response)

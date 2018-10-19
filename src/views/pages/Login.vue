@@ -11,7 +11,7 @@ v-layout(align-center='', justify-center='')
           v-text-field#password(prepend-icon='lock', name='password', label='Пароль', type='password' v-model="password")
       v-card-actions
         v-spacer
-        v-btn(color='red' @click="login") Войти
+        v-btn(color='red' @click="onSignIn") Войти
 </template>
 
 <script>
@@ -26,10 +26,10 @@ export default {
     }
   },
   methods: {
-    login () {
+    onSignIn () {
       const {username, password} = this
-      signIn(username, password).then(response => {
-        console.log('authorization was successful', response)
+      this.$store.dispatch(AUTH_REQUEST, { username, password }).then(() => {
+        this.$router.push('/')
       }).catch(error => console.log(error))
     }
   }
