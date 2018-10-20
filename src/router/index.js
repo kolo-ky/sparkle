@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import {AUTH_LOGOUT} from '@/store/actions/auth'
+import {store} from '@/store/'
+import firebase from 'firebase'
 
 const Events = () => import('@/views/pages/Events')
 const CreateEvent = () => import('@/views/pages/CreateEvent')
@@ -20,6 +23,7 @@ export const routes = [
     }
   },
   {
+    name: 'create-event',
     path: '/create-event',
     component: CreateEvent,
     props: true,
@@ -29,6 +33,7 @@ export const routes = [
     }
   },
   {
+    name: 'profile',
     path: '/profile',
     component: Profile,
     props: true,
@@ -38,6 +43,7 @@ export const routes = [
     }
   },
   {
+    name: 'sign-up',
     path: '/sign-up',
     component: Registration,
     props: true,
@@ -47,6 +53,7 @@ export const routes = [
     }
   },
   {
+    name: 'sign-in',
     path: '/sign-in',
     component: Login,
     props: true,
@@ -54,10 +61,32 @@ export const routes = [
       title: 'Вход',
       auth: false
     }
+  },
+  {
+    name: 'sign-out',
+    path: '/sign-out',
+    meta: {
+      title: 'Выход',
+      auth: true
+    },
+    beforeEnter: (from, to, next) => {
+      store.dispatch(AUTH_LOGOUT)
+      next('sign-in')
+    }
   }
 ]
 
 export const router = new VueRouter({
   routes,
   mode: 'history'
+})
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.auth)
+  const isAuthenticated = firebase.auth().currentUser
+  if (requiresAuth && !isAuthenticated) {
+    next('sign-in')
+  } else {
+    next()
+  }
 })

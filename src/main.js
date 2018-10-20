@@ -13,15 +13,14 @@ Vue.use(Vuetify)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  store,
-  render: h => h(App),
-  created () {
-    firebase.initializeApp(config)
-
-    firebase.auth().onAuthStateChanged((user) => {
+firebase.initializeApp(config)
+firebase.auth().onAuthStateChanged((user) => {
+  new Vue({
+    el: '#app',
+    router,
+    store,
+    render: h => h(App),
+    created () {
       this.$store.dispatch(USER_REQUEST)
       if (user) {
         this.$store.dispatch(USER_SUCCESS)
@@ -29,9 +28,7 @@ new Vue({
       } else {
         this.$store.dispatch(USER_SUCCESS)
         this.$store.dispatch(USER_LOGOUT)
-
-        this.$router.push('/login')
       }
-    })
-  }
+    }
+  })
 })

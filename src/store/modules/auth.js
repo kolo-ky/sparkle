@@ -1,6 +1,6 @@
 import {AUTH_REQUEST, AUTH_SUCCESS, AUTH_ERROR, AUTH_LOGOUT} from '../actions/auth'
 import {LOADING, SUCCESS, ERROR} from '@/constants/status'
-import {signIn} from '@/db/firebase/auth'
+import {signIn, signOut} from '@/db/firebase/auth'
 
 export default {
   state: {
@@ -24,10 +24,18 @@ export default {
           })
       })
     },
-    [AUTH_LOGOUT]: ({commit}) => {
+    [AUTH_LOGOUT]: ({commit, dispatch}) => {
       return new Promise((resolve, reject) => {
-        commit(AUTH_LOGOUT)
-        resolve()
+        commit(AUTH_REQUEST)
+        signOut()
+          .then(() => {
+            commit(AUTH_LOGOUT)
+            resolve()
+          })
+          .catch(error => {
+            commit(AUTH_ERROR, error)
+            reject(error)
+          })
       })
     }
   },

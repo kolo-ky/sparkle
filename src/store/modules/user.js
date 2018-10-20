@@ -21,6 +21,9 @@ export default {
     },
     [USER_LOGIN]: ({commit}, user) => {
       commit(USER_LOGIN)
+    },
+    [USER_LOGOUT]: ({commit}) => {
+      commit(USER_LOGOUT)
     }
   },
   mutations: {
