@@ -27,7 +27,9 @@ new Vue({
         this.$store.dispatch(USER_SUCCESS)
         this.$store.dispatch(USER_LOGIN, user)
       } else {
+        this.$store.dispatch(USER_SUCCESS)
         this.$store.dispatch(USER_LOGOUT)
+
         this.$router.push('/login')
       }
     })
