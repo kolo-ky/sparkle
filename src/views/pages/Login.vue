@@ -6,12 +6,12 @@ v-layout(align-center='', justify-center='')
         v-toolbar-title Вход
         v-spacer
       v-card-text
-        v-form
+        v-form(@submit.prevent="onSignIn")
           v-text-field(prepend-icon='person', name='login', label='Логин', type='text' v-model="username")
           v-text-field#password(prepend-icon='lock', name='password', label='Пароль', type='password' v-model="password")
-      v-card-actions
-        v-spacer
-        v-btn(color='red' @click="onSignIn") Войти
+          v-card-actions
+            v-spacer
+            v-btn(color='red' type="submit") Войти
 </template>
 
 <script>

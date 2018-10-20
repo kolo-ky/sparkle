@@ -16,7 +16,7 @@ export const routes = [
     component: Events,
     meta: {
       title: 'События',
-      auth: false
+      auth: null
     }
   },
   {
@@ -51,7 +51,7 @@ export const routes = [
     component: Login,
     props: true,
     meta: {
-      title: 'Логин',
+      title: 'Вход',
       auth: false
     }
   }

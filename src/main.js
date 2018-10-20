@@ -5,7 +5,9 @@ import App from './App'
 import {router} from './router/'
 import Vuetify from 'vuetify'
 import {store} from './store/'
-import {firebaseApp} from './db/firebase/'
+import firebase from 'firebase'
+import {config} from './db/firebase/config/'
+import { USER_REQUEST, USER_SUCCESS, USER_LOGIN, USER_LOGOUT } from './store/actions/user'
 
 Vue.use(Vuetify)
 Vue.config.productionTip = false
@@ -15,6 +17,19 @@ new Vue({
   el: '#app',
   router,
   store,
-  firebaseApp,
-  render: h => h(App)
+  render: h => h(App),
+  created () {
+    firebase.initializeApp(config)
+
+    firebase.auth().onAuthStateChanged((user) => {
+      this.$store.dispatch(USER_REQUEST)
+      if (user) {
+        this.$store.dispatch(USER_SUCCESS)
+        this.$store.dispatch(USER_LOGIN, user)
+      } else {
+        this.$store.dispatch(USER_LOGOUT)
+        this.$router.push('/login')
+      }
+    })
+  }
 })

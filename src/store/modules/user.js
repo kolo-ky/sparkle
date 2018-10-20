@@ -1,45 +1,42 @@
-import { USER_REQUEST, USER_ERROR, USER_SUCCESS } from '../actions/user'
-import Vue from 'vue'
-import { AUTH_LOGOUT } from '../actions/auth'
-import {onAuth} from '@/db/firebase/user'
+import { USER_REQUEST, USER_SUCCESS, USER_LOGIN, USER_LOGOUT } from '../actions/user'
+import {LOADING, SUCCESS} from '@/constants/status'
 
 export default {
-  namespaced: true,
   state: {
-    status: '',
-    profile: {}
+    profile: {},
+    authenticated: false,
+    status: ''
   },
   getters: {
-    getProfile: state => state.profile,
-    isProfileLoaded: state => !!state.profile.name
+    isAuthenticated: state => state.authenticated,
+    userStatus: state => state.status,
+    getProfile: state => state.profile
   },
   actions: {
-    [USER_REQUEST]: ({commit, dispatch}) => {
-      commit(USER_REQUEST)
-      onAuth()
-        .then(resp => {
-          commit(USER_SUCCESS, resp)
-        })
-        .catch(resp => {
-          commit(USER_ERROR)
-          // if resp is unauthorized, logout, to
-          dispatch(AUTH_LOGOUT)
-        })
+    [USER_REQUEST]: ({commit}, user) => {
+      commit(USER_REQUEST, user)
+    },
+    [USER_SUCCESS]: ({commit}, user) => {
+      commit(USER_SUCCESS)
+    },
+    [USER_LOGIN]: ({commit}, user) => {
+      commit(USER_LOGIN)
     }
   },
   mutations: {
     [USER_REQUEST]: (state) => {
-      state.status = 'loading'
+      state.status = LOADING
     },
-    [USER_SUCCESS]: (state, resp) => {
-      state.status = 'success'
-      Vue.set(state, 'profile', resp)
+    [USER_SUCCESS]: (state) => {
+      state.status = SUCCESS
     },
-    [USER_ERROR]: (state) => {
-      state.status = 'error'
+    [USER_LOGIN]: (state, user) => {
+      // state.profile = user
+      state.authenticated = true
     },
-    [AUTH_LOGOUT]: (state) => {
+    [USER_LOGOUT]: (state) => {
       state.profile = {}
+      state.authenticated = false
     }
   }
 }
