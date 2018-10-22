@@ -15,7 +15,7 @@ v-layout(align-center='', justify-center='')
       v-divider(light="")
       v-card-actions.pa-3
         v-spacer
-        v-btn(small="", color="#cccccc", to="/sign-up", round="", outline="") Нужен аккаунт? Зарегистрируйтесь
+        v-btn.text-lowercase.font-weight-thin(small="", color="#cccccc", to="/sign-up", round="", outline="") Нужен аккаунт? Зарегистрируйтесь
         v-spacer
 </template>
 
