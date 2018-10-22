@@ -6,13 +6,13 @@ v-layout(align-center='', justify-center='')
         v-toolbar-title Регистрация
         v-spacer
       v-card-text
-        v-form
+        v-form(@submit.prevent="onSignUp")
           v-text-field(prepend-icon='person', name='login', label='Логин', type='text' v-model="username")
           v-text-field#password(prepend-icon='lock', name='password', label='Пароль', type='password' v-model="password")
           v-text-field#confirmPassword(prepend-icon='lock', name='confirmPassword', label='Подтверждение пароля', type='password' v-model="confirmPassword")
-      v-card-actions
-        v-spacer
-        v-btn(color='red' @click="onSignUp") Зарегестрироваться
+          v-card-actions
+            v-spacer
+            v-btn(color='red') Зарегистрироваться
 </template>
 
 <script>
