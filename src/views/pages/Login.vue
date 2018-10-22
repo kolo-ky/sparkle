@@ -11,7 +11,12 @@ v-layout(align-center='', justify-center='')
           v-text-field#password(prepend-icon='lock', name='password', label='Пароль', type='password' v-model="password")
           v-card-actions
             v-spacer
-            v-btn(color='red' type="submit") Войти
+            v-btn(color='red', type="submit") Войти
+      v-divider(light="")
+      v-card-actions.pa-3
+        v-spacer
+        v-btn(small="", color="primary", to="/sign-up", round="", outline="") Нужен аккаунт? Зарегистрируйтесь
+        v-spacer
 </template>
 
 <script>
