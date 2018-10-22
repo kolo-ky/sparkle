@@ -14,17 +14,12 @@
 import {routes} from '@/router/'
 import {mapGetters} from 'vuex'
 
-import {SUCCESS} from '@/constants/status'
-
 export default {
   name: 'AppHeader',
   computed: {
     ...mapGetters(['isAuthenticated', 'userStatus']),
     menuList () {
-      if (this.userStatus === SUCCESS) {
-        return routes.filter(item => item.meta.auth === null || item.meta.auth === this.isAuthenticated)
-      }
-      return []
+      return routes.filter(item => item.meta.auth === null || item.meta.auth === this.isAuthenticated)
     }
   }
 }
