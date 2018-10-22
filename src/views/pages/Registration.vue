@@ -18,7 +18,7 @@ v-layout(align-center='', justify-center='')
       v-divider(light="")
       v-card-actions.pa-3
         v-spacer
-        v-btn(small="", color="primary", to="/sign-in", round="", outline="") Есть аккаунт? Войдите
+        v-btn(small="", color="#cccccc", to="/sign-in", round="", outline="") Есть аккаунт? Войдите
         v-spacer
 </template>
 
