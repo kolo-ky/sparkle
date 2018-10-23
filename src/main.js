@@ -1,6 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import VeeValidate from 'vee-validate';
 import App from './App'
 import {router} from './router/'
 import Vuetify from 'vuetify'
@@ -10,6 +11,7 @@ import {config} from './db/firebase/config/'
 import { USER_REQUEST, USER_SUCCESS, USER_LOGIN, USER_LOGOUT } from './store/actions/user'
 
 Vue.use(Vuetify)
+Vue.use(VeeValidate)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
