@@ -5,8 +5,8 @@ v-layout(align-center='', justify-center='')
       v-toolbar(dark='', color='red')
         v-toolbar-title Регистрация
         v-spacer
-      v-alert(color="error", icon="warning", outline="")
-        | 123
+      v-alert(:value="firebaseError" color="error", icon="warning", outline="")
+        | {{firebaseError}}
       v-card-text
         v-form(@submit.prevent="onSignUp")
           v-text-field(
@@ -50,6 +50,7 @@ v-layout(align-center='', justify-center='')
 
 <script>
 import {signUp} from '@/db/firebase/auth'
+import {dictionary} from '@/db/firebase/dictionary'
 
 export default {
   name: 'Registration',
@@ -59,11 +60,12 @@ export default {
       password: '',
       confirmPassword: '',
       process: false,
+      firebaseError: null,
       dictionary: {
         custom: {
           username: {
             required: () => 'Поле не должно быть пустым',
-            email: () => 'Неверный email',
+            email: () => 'Неверный email'
           },
           password: {
             required: () => 'Поле не должно быть пустым',
@@ -80,19 +82,28 @@ export default {
   },
   methods: {
     onSignUp () {
-      const {username, password} = this
       this.process = true
+      this.$validator.validate().then(result => {
+        this.firebaseError = null
 
-      signUp(username, password).then(() => {
-        this.process = false
-        this.$router.push('/sign-in')
-      }).catch(() => {
-        this.process = false
+        if (!result) {
+          this.process = false
+        } else {
+          const {username, password} = this
+
+          signUp(username, password).then(() => {
+            this.process = false
+            this.$router.push('/')
+          }).catch(error => {
+            this.firebaseError = dictionary[error.code]
+            this.process = false
+          })
+        }
       })
     }
   },
   mounted () {
     this.$validator.localize('ru', this.dictionary)
-  },
+  }
 }
 </script>
