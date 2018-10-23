@@ -51,6 +51,7 @@ v-layout(align-center='', justify-center='')
 <script>
 import {signUp} from '@/db/firebase/auth'
 import {dictionary} from '@/db/firebase/dictionary'
+import {USER_LOGIN} from '@/store/actions/user'
 
 export default {
   name: 'Registration',
@@ -93,6 +94,7 @@ export default {
 
           signUp(username, password).then(() => {
             this.process = false
+            this.$store.dispatch(USER_LOGIN)
             this.$router.push('/')
           }).catch(error => {
             this.firebaseError = dictionary[error.code]
