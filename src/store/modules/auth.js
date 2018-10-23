@@ -1,59 +1,60 @@
-import {AUTH_REQUEST, AUTH_SUCCESS, AUTH_ERROR, AUTH_LOGOUT} from '../actions/auth'
+import {AUTH_REGISTER, AUTH_LOGIN, AUTH_LOGOUT} from '../actions/auth'
 import {USER_LOGIN, USER_LOGOUT} from '../actions/user'
-import {LOADING, SUCCESS, ERROR} from '@/constants/status'
-import {signIn, signOut} from '@/db/firebase/auth'
+import {SET_LOADING, SET_ERROR, CLEAR_ERROR} from '../actions/common'
+import {signUp, signIn, signOut} from '@/db/firebase/auth'
 
 export default {
-  state: {
-    status: ''
-  },
-  getters: {
-    authStatus: state => state.status
-  },
   actions: {
-    [AUTH_REQUEST]: ({commit, dispatch}, user) => {
+    [AUTH_REGISTER]: ({commit, dispatch}, user) => {
+      commit(CLEAR_ERROR)
       return new Promise((resolve, reject) => {
-        commit(AUTH_REQUEST)
-        signIn(user.username, user.password)
+        commit(SET_LOADING, true)
+        signUp(user.username, user.password)
           .then(response => {
-            commit(AUTH_SUCCESS)
+            commit(SET_LOADING, false)
             dispatch(USER_LOGIN)
             resolve(response)
           })
           .catch(error => {
-            commit(AUTH_ERROR, error)
+            commit(SET_LOADING, false)
+            commit(SET_ERROR, error)
+            reject(error)
+          })
+      })
+    },
+    [AUTH_LOGIN]: ({commit, dispatch}, user) => {
+      commit(CLEAR_ERROR)
+      return new Promise((resolve, reject) => {
+        commit(SET_LOADING, true)
+        signIn(user.username, user.password)
+          .then(response => {
+            commit(SET_LOADING, false)
+            dispatch(USER_LOGIN)
+            resolve(response)
+          })
+          .catch(error => {
+            commit(SET_LOADING, false)
+            commit(SET_ERROR, error)
             reject(error)
           })
       })
     },
     [AUTH_LOGOUT]: ({commit, dispatch}) => {
+      commit(CLEAR_ERROR)
       return new Promise((resolve, reject) => {
-        commit(AUTH_REQUEST)
+        commit(SET_LOADING, true)
         signOut()
           .then(() => {
-            commit(AUTH_LOGOUT)
+            commit(SET_LOADING, false)
             dispatch(USER_LOGOUT)
             resolve()
           })
           .catch(error => {
-            commit(AUTH_ERROR, error)
+            commit(SET_LOADING, false)
+            commit(SET_ERROR, error)
             reject(error)
           })
       })
-    }
-  },
-  mutations: {
-    [AUTH_REQUEST]: (state) => {
-      state.status = LOADING
-    },
-    [AUTH_SUCCESS]: (state) => {
-      state.status = SUCCESS
-    },
-    [AUTH_ERROR]: (state) => {
-      state.status = ERROR
-    },
-    [AUTH_LOGOUT]: (state) => {
-      state.status = SUCCESS
     }
   }
 }

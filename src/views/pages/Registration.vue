@@ -5,8 +5,6 @@ v-layout(align-center='', justify-center='')
       v-toolbar(dark='', color='red')
         v-toolbar-title Регистрация
         v-spacer
-      v-alert(:value="firebaseError" color="error", icon="warning", outline="")
-        | {{firebaseError}}
       v-card-text
         v-form(@submit.prevent="onSignUp")
           v-text-field(
@@ -29,7 +27,7 @@ v-layout(align-center='', justify-center='')
             :rules="(!errors.first('password')) ? [true] : [errors.first('password')]"
           )
           v-text-field#confirmPassword(
-            prepend-icon='lock'
+            prepend-icon='refresh'
             name='confirmPassword'
             label='Подтверждение пароля'
             type='password'
@@ -40,18 +38,17 @@ v-layout(align-center='', justify-center='')
           )
           v-card-actions
             v-spacer
-            v-btn(color='red', type="submit", :disabled="process") Зарегистрироваться
+            v-btn(color='red', type="submit" :disabled="loading") Зарегистрироваться
       v-divider(light="")
       v-card-actions.pa-3
         v-spacer
-        v-btn.text-lowercase.font-weight-thin(small="", color="#cccccc", to="/sign-in", round="", outline="") Есть аккаунт? Войдите
+        v-btn.text-lowercase(small="", color="primary", to="/sign-in", round="", outline="") Есть аккаунт? Войдите
         v-spacer
 </template>
 
 <script>
-import {signUp} from '@/db/firebase/auth'
-import {dictionary} from '@/db/firebase/dictionary'
-import {USER_LOGIN} from '@/store/actions/user'
+import {AUTH_REGISTER} from '@/store/actions/auth'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'Registration',
@@ -60,8 +57,6 @@ export default {
       username: '',
       password: '',
       confirmPassword: '',
-      process: false,
-      firebaseError: null,
       dictionary: {
         custom: {
           username: {
@@ -81,25 +76,17 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters(['loading'])
+  },
   methods: {
     onSignUp () {
-      this.process = true
       this.$validator.validate().then(result => {
-        this.firebaseError = null
-
-        if (!result) {
-          this.process = false
-        } else {
+        if (result) {
           const {username, password} = this
-
-          signUp(username, password).then(() => {
-            this.process = false
-            this.$store.dispatch(USER_LOGIN)
+          this.$store.dispatch(AUTH_REGISTER, { username, password }).then(() => {
             this.$router.push('/')
-          }).catch(error => {
-            this.firebaseError = dictionary[error.code]
-            this.process = false
-          })
+          }).catch(() => {})
         }
       })
     }

@@ -20,7 +20,7 @@ v-layout(align-center='', justify-center='')
 </template>
 
 <script>
-import {AUTH_REQUEST} from '@/store/actions/auth'
+import {AUTH_LOGIN} from '@/store/actions/auth'
 
 export default {
   name: 'Login',
@@ -33,7 +33,7 @@ export default {
   methods: {
     onSignIn () {
       const {username, password} = this
-      this.$store.dispatch(AUTH_REQUEST, { username, password }).then(() => {
+      this.$store.dispatch(AUTH_LOGIN, { username, password }).then(() => {
         this.$router.push('/')
       }).catch(error => console.log(error))
     }

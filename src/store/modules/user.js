@@ -11,7 +11,7 @@ export default {
   },
   actions: {
     [USER_LOGIN]: ({commit}, user) => {
-      commit(USER_LOGIN)
+      commit(USER_LOGIN, user)
     },
     [USER_LOGOUT]: ({commit}) => {
       commit(USER_LOGOUT)
