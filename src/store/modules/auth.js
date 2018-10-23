@@ -1,4 +1,5 @@
 import {AUTH_REQUEST, AUTH_SUCCESS, AUTH_ERROR, AUTH_LOGOUT} from '../actions/auth'
+import {USER_LOGIN, USER_LOGOUT} from '../actions/user'
 import {LOADING, SUCCESS, ERROR} from '@/constants/status'
 import {signIn, signOut} from '@/db/firebase/auth'
 
@@ -10,12 +11,13 @@ export default {
     authStatus: state => state.status
   },
   actions: {
-    [AUTH_REQUEST]: ({commit}, user) => {
+    [AUTH_REQUEST]: ({commit, dispatch}, user) => {
       return new Promise((resolve, reject) => {
         commit(AUTH_REQUEST)
         signIn(user.username, user.password)
           .then(response => {
             commit(AUTH_SUCCESS)
+            dispatch(USER_LOGIN)
             resolve(response)
           })
           .catch(error => {
@@ -30,6 +32,7 @@ export default {
         signOut()
           .then(() => {
             commit(AUTH_LOGOUT)
+            dispatch(USER_LOGOUT)
             resolve()
           })
           .catch(error => {

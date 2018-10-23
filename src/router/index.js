@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import {AUTH_LOGOUT} from '@/store/actions/auth'
+import {USER_LOGOUT} from '@/store/actions/user'
 import {store} from '@/store/'
 import firebase from 'firebase'
 
@@ -71,6 +72,7 @@ export const routes = [
     },
     beforeEnter: (from, to, next) => {
       store.dispatch(AUTH_LOGOUT)
+      store.dispatch(USER_LOGOUT)
       next('sign-in')
     }
   }
@@ -82,10 +84,12 @@ export const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const requiresAuth = to.matched.some(record => record.meta.auth)
-  const isAuthenticated = firebase.auth().currentUser
-  if (requiresAuth && !isAuthenticated) {
-    next('sign-in')
+  if (to.matched.some(record => record.meta.auth)) {
+    if (!firebase.auth().currentUser) {
+      next('sign-in')
+    } else {
+      next()
+    }
   } else {
     next()
   }

@@ -8,7 +8,7 @@ import Vuetify from 'vuetify'
 import {store} from './store/'
 import firebase from 'firebase'
 import {config} from './db/firebase/config/'
-import { USER_REQUEST, USER_SUCCESS, USER_LOGIN, USER_LOGOUT } from './store/actions/user'
+import {USER_LOGIN, USER_LOGOUT} from './store/actions/user'
 
 Vue.use(Vuetify)
 Vue.use(VeeValidate)
@@ -16,22 +16,22 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 firebase.initializeApp(config)
+let app
 
 firebase.auth().onAuthStateChanged((user) => {
-  new Vue({
-    el: '#app',
-    router,
-    store,
-    render: h => h(App),
-    created () {
-      this.$store.dispatch(USER_REQUEST)
-      if (user) {
-        this.$store.dispatch(USER_SUCCESS)
-        this.$store.dispatch(USER_LOGIN, user)
-      } else {
-        this.$store.dispatch(USER_SUCCESS)
-        this.$store.dispatch(USER_LOGOUT)
+  if (!app) {
+    app = new Vue({
+      el: '#app',
+      router,
+      store,
+      render: h => h(App),
+      created () {
+        if (user) {
+          this.$store.dispatch(USER_LOGIN, user)
+        } else {
+          this.$store.dispatch(USER_LOGOUT)
+        }
       }
-    }
-  })
+    })
+  }
 })
