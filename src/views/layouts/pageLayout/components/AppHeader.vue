@@ -7,7 +7,9 @@
       v-for="item in menuList"
       :key="item.path"
     )
-        v-btn(flat='' :to='item.path' router="") {{item.meta.title}}
+        v-btn(flat='', :to='item.path', router="")
+          v-icon(left="") {{item.meta.icon}}
+          | {{item.meta.title}}
 </template>
 
 <script>

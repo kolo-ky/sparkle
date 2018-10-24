@@ -20,6 +20,7 @@ export const routes = [
     component: Events,
     meta: {
       title: 'События',
+      icon: 'event',
       auth: null
     }
   },
@@ -30,6 +31,7 @@ export const routes = [
     props: true,
     meta: {
       title: 'Создать событие',
+      icon: 'event_note',
       auth: true
     }
   },
@@ -40,6 +42,7 @@ export const routes = [
     props: true,
     meta: {
       title: 'Профиль',
+      icon: 'person',
       auth: true
     }
   },
@@ -50,6 +53,7 @@ export const routes = [
     props: true,
     meta: {
       title: 'Регистрация',
+      icon: 'person_add',
       auth: false
     }
   },
@@ -60,6 +64,7 @@ export const routes = [
     props: true,
     meta: {
       title: 'Вход',
+      icon: 'input',
       auth: false
     }
   },
@@ -68,6 +73,7 @@ export const routes = [
     path: '/sign-out',
     meta: {
       title: 'Выход',
+      icon: 'exit_to_app',
       auth: true
     },
     beforeEnter: (from, to, next) => {
