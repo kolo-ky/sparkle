@@ -1,10 +1,8 @@
 <template lang="pug">
 v-layout(align-center='', justify-center='')
   v-flex(xs12='', sm8='', md4='')
-    v-card.elevation-12
-      v-toolbar(dark='', color='red')
-        v-toolbar-title Регистрация
-        v-spacer
+    v-card.elevation-12(light="")
+      v-spacer
       v-card-text
         v-form(@submit.prevent="onSignUp")
           v-text-field(
@@ -15,6 +13,7 @@ v-layout(align-center='', justify-center='')
             v-model="username"
             v-validate="'required|email'"
             :rules="(!errors.first('username')) ? [true] : [errors.first('username')]"
+            autocomplete="off"
           )
           v-text-field#password(
             prepend-icon='lock'
@@ -25,6 +24,7 @@ v-layout(align-center='', justify-center='')
             ref='password'
             v-validate="'required|min:6'"
             :rules="(!errors.first('password')) ? [true] : [errors.first('password')]"
+            autocomplete="off"
           )
           v-text-field#confirmPassword(
             prepend-icon='refresh'
@@ -35,14 +35,15 @@ v-layout(align-center='', justify-center='')
             data-vv-as="password"
             v-validate="'required|min:6|confirmed:password'"
             :rules="(!errors.first('confirmPassword')) ? [true] : [errors.first('confirmPassword')]"
+            autocomplete="off"
           )
           v-card-actions
             v-spacer
-            v-btn(color='red', type="submit" :disabled="loading") Зарегистрироваться
+            v-btn.white--text.text-lowercase(color='red', type="submit" :disabled="loading") Зарегистрироваться
       v-divider(light="")
       v-card-actions.pa-3
         v-spacer
-        v-btn.text-lowercase(small="", color="primary", to="/sign-in", round="", outline="") Есть аккаунт? Войдите
+        v-btn.text-lowercase(small="", color="dark", to="/sign-in", round="", outline="") Есть аккаунт? Войдите
         v-spacer
 </template>
 
