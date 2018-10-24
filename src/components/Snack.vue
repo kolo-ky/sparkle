@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-snackbar(:value="true", :multi-line="true", :timeout='5000', @input="closeSnack", top="true", v-if="error")
+  v-snackbar(:value="true", :multi-line="true", :timeout='5000', @input="closeSnack", :top="true", v-if="error")
     | {{ error }}
 </template>
 
