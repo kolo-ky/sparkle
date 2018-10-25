@@ -40,21 +40,16 @@ export default {
       })
     },
     [AUTH_LOGOUT]: ({commit, dispatch}) => {
-      commit(CLEAR_ERROR)
-      return new Promise((resolve, reject) => {
-        commit(SET_LOADING, true)
-        signOut()
-          .then(() => {
-            commit(SET_LOADING, false)
-            dispatch(USER_LOGOUT)
-            resolve()
-          })
-          .catch(error => {
-            commit(SET_LOADING, false)
-            commit(SET_ERROR, error)
-            reject(error)
-          })
-      })
+      commit(SET_LOADING, true)
+      signOut()
+        .then(() => {
+          commit(SET_LOADING, false)
+          dispatch(USER_LOGOUT)
+        })
+        .catch(error => {
+          commit(SET_LOADING, false)
+          commit(SET_ERROR, error)
+        })
     }
   }
 }
