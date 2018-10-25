@@ -76,8 +76,12 @@ export const routes = [
       auth: true
     },
     beforeEnter: (from, to, next) => {
-      store.dispatch(AUTH_LOGOUT)
-      next('sign-in')
+      Vue.prototype.$confirm('Вы дейстивтельно хотите выйти?').then(res => {
+        if (res) {
+          store.dispatch(AUTH_LOGOUT)
+          next('sign-in')
+        }
+      })
     }
   }
 ]
