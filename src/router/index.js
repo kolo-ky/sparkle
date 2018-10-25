@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import {AUTH_LOGOUT} from '@/store/actions/auth'
-import {USER_LOGOUT} from '@/store/actions/user'
 import {store} from '@/store/'
 import firebase from 'firebase'
 
@@ -78,7 +77,6 @@ export const routes = [
     },
     beforeEnter: (from, to, next) => {
       store.dispatch(AUTH_LOGOUT)
-      store.dispatch(USER_LOGOUT)
       next('sign-in')
     }
   }
