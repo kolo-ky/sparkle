@@ -21,7 +21,7 @@ export default {
   computed: {
     ...mapGetters(['isAuthenticated', 'userStatus']),
     menuList () {
-      return routes.filter(item => item.meta.auth === null || item.meta.auth === this.isAuthenticated)
+      return routes.filter(item => item.meta && (item.meta.auth === null || item.meta.auth === this.isAuthenticated))
     }
   }
 }

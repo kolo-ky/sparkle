@@ -9,6 +9,7 @@ const CreateEvent = () => import('@/views/pages/CreateEvent')
 const Profile = () => import('@/views/pages/Profile')
 const Login = () => import('@/views/pages/Login')
 const Registration = () => import('@/views/pages/Registration')
+const NotFound = () => import('@/views/pages/NotFound')
 
 Vue.use(VueRouter)
 
@@ -83,6 +84,10 @@ export const routes = [
         }
       })
     }
+  },
+  {
+    path: '*',
+    component: NotFound
   }
 ]
 
