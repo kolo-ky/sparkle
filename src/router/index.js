@@ -3,9 +3,11 @@ import VueRouter from 'vue-router'
 import {AUTH_LOGOUT} from '@/store/actions/auth'
 import {store} from '@/store/'
 import firebase from 'firebase'
+import friends from './children/friends'
 
 const Events = () => import('@/views/pages/Events')
 const CreateEvent = () => import('@/views/pages/CreateEvent')
+const Friends = () => import('@/views/pages/Friends')
 const Profile = () => import('@/views/pages/Profile')
 const Login = () => import('@/views/pages/Login')
 const Registration = () => import('@/views/pages/Registration')
@@ -23,6 +25,18 @@ export const routes = [
       icon: 'event',
       auth: null
     }
+  },
+  {
+    name: 'friends',
+    path: '/friends',
+    component: Friends,
+    meta: {
+      title: 'Друзья',
+      icon: 'group',
+      auth: true
+    },
+    children: friends,
+    redirect: {name: 'my-friends'}
   },
   {
     name: 'create-event',
@@ -80,7 +94,7 @@ export const routes = [
       Vue.prototype.$confirm('Вы дейстивтельно хотите выйти?').then(res => {
         if (res) {
           store.dispatch(AUTH_LOGOUT)
-          next('sign-in')
+          next({name: 'sign-in'})
         }
       })
     }
@@ -99,7 +113,7 @@ export const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.auth)) {
     if (!firebase.auth().currentUser) {
-      next('sign-in')
+      next({name: 'sign-in'})
     } else {
       next()
     }

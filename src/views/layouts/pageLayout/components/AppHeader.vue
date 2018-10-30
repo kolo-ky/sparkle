@@ -7,22 +7,32 @@
       v-for="item in menuList"
       :key="item.path"
     )
-        v-btn(flat='', :to='item.path', router="")
-          v-icon(left="") {{item.meta.icon}}
-          | {{item.meta.title}}
+      toolbar-button(:menuItem="item")
 </template>
 
 <script>
 import {routes} from '@/router/'
 import {mapGetters} from 'vuex'
+import ToolbarButton from './partial/ToolbarButton'
 
 export default {
   name: 'AppHeader',
+  data () {
+    return {
+      items: [
+        'Мои друзья',
+        'Найти друзей'
+      ]
+    }
+  },
   computed: {
-    ...mapGetters(['isAuthenticated', 'userStatus']),
+    ...mapGetters(['isAuthenticated']),
     menuList () {
       return routes.filter(item => item.meta && (item.meta.auth === null || item.meta.auth === this.isAuthenticated))
     }
+  },
+  components: {
+    ToolbarButton
   }
 }
 </script>
