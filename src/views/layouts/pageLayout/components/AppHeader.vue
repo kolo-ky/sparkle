@@ -17,14 +17,6 @@ import ToolbarButton from './partial/ToolbarButton'
 
 export default {
   name: 'AppHeader',
-  data () {
-    return {
-      items: [
-        'Мои друзья',
-        'Найти друзей'
-      ]
-    }
-  },
   computed: {
     ...mapGetters(['isAuthenticated']),
     menuList () {
