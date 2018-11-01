@@ -74,7 +74,7 @@ export const routes = [
     props: true,
     meta: {
       title: 'Вход',
-      icon: 'input',
+      icon: 'how_to_reg',
       auth: false
     }
   },
