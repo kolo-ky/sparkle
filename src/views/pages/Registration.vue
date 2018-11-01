@@ -86,7 +86,7 @@ export default {
         if (result) {
           const {username, password} = this
           this.$store.dispatch(AUTH_REGISTER, { username, password }).then(() => {
-            this.$router.push('/')
+            this.$router.push({name: 'all-events'})
           }).catch(() => {})
         }
       })
