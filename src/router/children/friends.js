@@ -1,5 +1,5 @@
-const MyFriends = () => import('@/views/pages/MyFriends')
-const FindFriends = () => import('@/views/pages/FindFriends')
+const MyFriends = () => import('@/views/pages/friends/MyFriends')
+const FindFriends = () => import('@/views/pages/friends/FindFriends')
 
 export default [
   {
@@ -8,7 +8,6 @@ export default [
     component: MyFriends,
     meta: {
       title: 'Мои друзья',
-      icon: 'group',
       auth: true
     }
   },
@@ -18,7 +17,6 @@ export default [
     component: FindFriends,
     meta: {
       title: 'Найти друзей',
-      icon: 'group',
       auth: true
     }
   }

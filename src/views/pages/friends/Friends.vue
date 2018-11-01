@@ -1,6 +1,5 @@
 <template lang="pug">
-  v-layout
-    h1 Events
+  router-view
 </template>
 
 <script>

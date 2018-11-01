@@ -4,10 +4,10 @@ import {AUTH_LOGOUT} from '@/store/actions/auth'
 import {store} from '@/store/'
 import firebase from 'firebase'
 import friends from './children/friends'
+import events from './children/events'
 
-const Events = () => import('@/views/pages/Events')
-const CreateEvent = () => import('@/views/pages/CreateEvent')
-const Friends = () => import('@/views/pages/Friends')
+const Events = () => import('@/views/pages/events/Events')
+const Friends = () => import('@/views/pages/friends/Friends')
 const Profile = () => import('@/views/pages/Profile')
 const Login = () => import('@/views/pages/Login')
 const Registration = () => import('@/views/pages/Registration')
@@ -17,14 +17,21 @@ Vue.use(VueRouter)
 
 export const routes = [
   {
-    name: 'events',
+    name: 'home',
     path: '/',
+    redirect: {name: 'all-events'}
+  },
+  {
+    name: 'events',
+    path: '/events',
     component: Events,
     meta: {
       title: 'События',
       icon: 'event',
-      auth: null
-    }
+      auth: true
+    },
+    children: events,
+    redirect: {name: 'all-events'}
   },
   {
     name: 'friends',
@@ -37,17 +44,6 @@ export const routes = [
     },
     children: friends,
     redirect: {name: 'my-friends'}
-  },
-  {
-    name: 'create-event',
-    path: '/create-event',
-    component: CreateEvent,
-    props: true,
-    meta: {
-      title: 'Создать событие',
-      icon: 'event_note',
-      auth: true
-    }
   },
   {
     name: 'profile',
