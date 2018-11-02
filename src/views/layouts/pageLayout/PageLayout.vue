@@ -3,7 +3,8 @@
     app-header
     v-content
       v-container(fill-height='')
-        router-view
+        transition(name="moveInUp" mode="out-in")
+         router-view
     app-footer
     snack
 </template>
@@ -12,6 +13,8 @@
 import AppHeader from '@/views/layouts/pageLayout/components/AppHeader'
 import AppFooter from '@/views/layouts/pageLayout/components/AppFooter'
 import Snack from '@/components/Snack'
+
+import '@/assets/animations/page.css'
 
 export default {
   name: 'PageLayout',
