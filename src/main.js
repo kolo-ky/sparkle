@@ -7,8 +7,8 @@ import App from './App'
 import {router} from './router/'
 import Vuetify from 'vuetify'
 import {store} from './store/'
-import firebase from 'firebase'
-import {config} from './db/firebase/config/'
+import {firebaseApp} from './db/firebase/'
+// import {config} from './db/firebase/config/'
 import {USER_LOGIN, USER_LOGOUT} from './store/actions/user'
 
 Vue.use(Vuetify)
@@ -22,10 +22,10 @@ Vue.use(VuetifyConfirm, {
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-firebase.initializeApp(config)
+// firebase.initializeApp(config)
 let app
 
-firebase.auth().onAuthStateChanged((user) => {
+firebaseApp.auth().onAuthStateChanged((user) => {
   if (!app) {
     app = new Vue({
       el: '#app',
