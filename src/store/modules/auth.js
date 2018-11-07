@@ -7,37 +7,31 @@ export default {
   actions: {
     [AUTH_REGISTER]: ({commit, dispatch}, user) => {
       commit(CLEAR_ERROR)
-      return new Promise((resolve, reject) => {
-        commit(SET_LOADING, true)
-        signUp(user.username, user.password)
-          .then(response => {
-            commit(SET_LOADING, false)
-            dispatch(USER_LOGIN)
-            resolve(response)
-          })
-          .catch(error => {
-            commit(SET_LOADING, false)
-            commit(SET_ERROR, error)
-            reject(error)
-          })
-      })
+      commit(SET_LOADING, true)
+      return signUp(user.username, user.password)
+        .then(response => {
+          commit(SET_LOADING, false)
+          dispatch(USER_LOGIN, response.user)
+          return Promise.resolve(response)
+        })
+        .catch(error => {
+          commit(SET_LOADING, false)
+          commit(SET_ERROR, error)
+        })
     },
     [AUTH_LOGIN]: ({commit, dispatch}, user) => {
       commit(CLEAR_ERROR)
-      return new Promise((resolve, reject) => {
-        commit(SET_LOADING, true)
-        signIn(user.username, user.password)
-          .then(response => {
-            commit(SET_LOADING, false)
-            dispatch(USER_LOGIN)
-            resolve(response)
-          })
-          .catch(error => {
-            commit(SET_LOADING, false)
-            commit(SET_ERROR, error)
-            reject(error)
-          })
-      })
+      commit(SET_LOADING, true)
+      return signIn(user.username, user.password)
+        .then(response => {
+          commit(SET_LOADING, false)
+          dispatch(USER_LOGIN, response.user)
+          return Promise.resolve(response)
+        })
+        .catch(error => {
+          commit(SET_LOADING, false)
+          commit(SET_ERROR, error)
+        })
     },
     [AUTH_LOGOUT]: ({commit, dispatch}) => {
       commit(SET_LOADING, true)
