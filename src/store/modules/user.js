@@ -37,7 +37,7 @@ export default {
   },
   mutations: {
     [USER_LOGIN]: (state, user) => {
-      state.profile = {...user}
+      state.profile = user
       state.authenticated = true
     },
     [USER_LOGOUT]: (state) => {
