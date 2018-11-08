@@ -5,12 +5,23 @@ import {getInfo} from '@/db/firebase/user'
 export default {
   state: {
     profile: {},
-    authenticated: false
+    authenticated: false,
+    dataKeys: {name: 'Имя', surname: 'Фамилия', email: 'Почта', bio: 'О себе'}
   },
   getters: {
     isAuthenticated: state => state.authenticated,
     profile: state => state.profile,
-    getUserId: state => state.profile.userId
+    getUserId: state => state.profile.userId,
+    profileList (state) {
+      return Object.keys(state.dataKeys).map(key => {
+        if (state.profile[key]) {
+          return {
+            key: state.dataKeys[key],
+            value: state.profile[key]
+          }
+        }
+      })
+    }
   },
   actions: {
     [USER_LOGIN]: ({commit}, user) => {

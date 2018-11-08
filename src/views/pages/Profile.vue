@@ -1,6 +1,6 @@
 <template lang="pug">
   v-layout(wrap="" row="")
-    v-flex(md-12='')
+    v-flex(md-12='' v-if='!loading')
       v-container
         v-layout
           h1 Профиль
@@ -18,6 +18,7 @@
                 v-list-tile-action
                   v-btn(icon='', ripple='')
                     v-icon(color='grey lighten-1') edit
+    app-progress(v-else)
 </template>
 
 <script>
@@ -27,15 +28,7 @@ import {mapGetters} from 'vuex'
 export default {
   name: 'Profile',
   computed: {
-    ...mapGetters(['profile']),
-    profileList () {
-      return Object.keys(this.profile).map(key => {
-        return {
-          key,
-          value: this.profile[key]
-        }
-      })
-    }
+    ...mapGetters(['profileList', 'loading'])
   },
   components: {
     AppProgress
