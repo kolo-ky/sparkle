@@ -9,7 +9,7 @@ export default {
   },
   getters: {
     isAuthenticated: state => state.authenticated,
-    getProfile: state => state.profile,
+    profile: state => state.profile,
     getUserId: state => state.profile.userId
   },
   actions: {
@@ -21,8 +21,8 @@ export default {
           querySnapshot.forEach(doc => {
             commit(SET_LOADING, false)
             commit(USER_LOGIN, {
-              email: user.email,
-              ...doc.data()
+              ...doc.data(),
+              email: user.email
             })
           })
         })

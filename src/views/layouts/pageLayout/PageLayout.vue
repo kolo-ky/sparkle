@@ -4,7 +4,7 @@
     v-content
       v-container(fill-height='')
         transition(name="moveInUp" mode="out-in")
-         router-view
+          router-view
     app-footer
     snack
 </template>
