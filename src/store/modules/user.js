@@ -29,13 +29,21 @@ export default {
       commit(SET_LOADING, true)
       getInfo(user.uid)
         .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
+          if (querySnapshot.docs.length) {
+            querySnapshot.forEach(doc => {
+              commit(SET_LOADING, false)
+              commit(USER_LOGIN, {
+                ...doc.data(),
+                email: user.email
+              })
+            })
+          } else {
             commit(SET_LOADING, false)
             commit(USER_LOGIN, {
-              ...doc.data(),
-              email: user.email
+              email: user.email,
+              userId: user.uid
             })
-          })
+          }
         })
         .catch(error => {
           commit(SET_LOADING, false)

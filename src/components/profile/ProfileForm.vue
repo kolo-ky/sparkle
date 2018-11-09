@@ -1,7 +1,7 @@
 <template lang="pug">
   v-card
     v-card-text(v-for='item in items' :key='item.key')
-      v-text-field(:label='item.key')
+      v-text-field(:label='item.key' :value='item.value')
     v-card-actions(m-4='')
       v-btn(flat='' @click='switchToBack') Назад
       v-spacer
