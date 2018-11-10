@@ -6,18 +6,40 @@ export default {
   state: {
     profile: {},
     authenticated: false,
-    dataKeys: {name: 'Имя', surname: 'Фамилия', email: 'Почта', bio: 'О себе'}
+    model: {
+      name: {
+        title: 'Имя',
+        value: ''
+      },
+      surname: {
+        title: 'Фамилия',
+        value: ''
+      },
+      email: {
+        title: 'Почта',
+        value: ''
+      },
+      bio: {
+        title: 'О себе',
+        value: ''
+      }
+    }
   },
   getters: {
     isAuthenticated: state => state.authenticated,
     profile: state => state.profile,
     getUserId: state => state.profile.userId,
     profileList (state) {
-      return Object.keys(state.dataKeys).map(key => {
+      return Object.keys(state.model).map(key => {
         if (state.profile[key]) {
           return {
-            key: state.dataKeys[key],
+            title: state.model[key].title,
             value: state.profile[key]
+          }
+        } else {
+          return {
+            title: state.model[key].title,
+            value: ''
           }
         }
       })
@@ -40,8 +62,7 @@ export default {
           } else {
             commit(SET_LOADING, false)
             commit(USER_LOGIN, {
-              email: user.email,
-              userId: user.uid
+              email: user.email
             })
           }
         })
