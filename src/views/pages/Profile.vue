@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import AppProgress from '@/components/Progress'
 import {mapGetters} from 'vuex'
+import AppProgress from '@/components/Progress'
 import ProfileList from '@/components/profile/ProfileList'
 import ProfileForm from '@/components/profile/ProfileForm'
 

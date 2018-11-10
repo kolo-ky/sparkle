@@ -1,29 +1,13 @@
 import { USER_LOGIN, USER_LOGOUT } from '../actions/user'
 import {CLEAR_ERROR, SET_LOADING, SET_ERROR} from '../actions/common'
 import {getInfo} from '@/db/firebase/user'
+import model from './models/user'
 
 export default {
   state: {
     profile: {},
     authenticated: false,
-    model: {
-      name: {
-        title: 'Имя',
-        value: ''
-      },
-      surname: {
-        title: 'Фамилия',
-        value: ''
-      },
-      email: {
-        title: 'Почта',
-        value: ''
-      },
-      bio: {
-        title: 'О себе',
-        value: ''
-      }
-    }
+    model: model
   },
   getters: {
     isAuthenticated: state => state.authenticated,
@@ -33,13 +17,17 @@ export default {
       return Object.keys(state.model).map(key => {
         if (state.profile[key]) {
           return {
+            key,
             title: state.model[key].title,
-            value: state.profile[key]
+            value: state.profile[key],
+            validate: state.model[key].validate
           }
         } else {
           return {
+            key,
             title: state.model[key].title,
-            value: ''
+            value: '',
+            validate: state.model[key].validate
           }
         }
       })
