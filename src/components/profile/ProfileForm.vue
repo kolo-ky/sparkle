@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { UPDATE_PROFILE } from '@/store/actions/user'
 import model from '@/store/modules/models/user'
 import _ from 'lodash'
 
@@ -68,9 +67,10 @@ export default {
       return user
     },
     onSave () {
-      this.$store.dispatch(UPDATE_PROFILE, this.prepareUser()).then(() => {
-        console.log(1)
-        this.$emit('handleSwitch')
+      this.$validator.validate().then(result => {
+        if (result) {
+          this.$emit('handleSave', this.prepareUser())
+        }
       })
     }
   },
