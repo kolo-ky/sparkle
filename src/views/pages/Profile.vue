@@ -34,6 +34,7 @@ export default {
   methods: {
     switchView () {
       this.edit = !this.edit
+      console.log(this.edit)
     }
   },
   components: {

@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { UPDATE_PROFILE } from '@/store/actions/user'
 import model from '@/store/modules/models/user'
 import _ from 'lodash'
 
@@ -59,9 +60,18 @@ export default {
         this.$emit('handleSwitch')
       }
     },
+    prepareUser () {
+      let user = {}
+      this.userData.map(item => {
+        user[item.key] = item.value
+      })
+      return user
+    },
     onSave () {
-      console.log(this.userData)
-      this.$emit('handleSwitch')
+      this.$store.dispatch(UPDATE_PROFILE, this.prepareUser()).then(() => {
+        console.log(1)
+        this.$emit('handleSwitch')
+      })
     }
   },
   mounted () {

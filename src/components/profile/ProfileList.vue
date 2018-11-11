@@ -7,7 +7,7 @@
             v-list-tile-title {{ item.title }}
             v-list-tile-sub-title {{ item.value }}
     v-card-actions(m-4='')
-      v-btn(flat='' @click="switchToEdit") Редактировать
+      v-btn(flat='' @click="switchToEdit") Изменить
 </template>
 
 <script>
