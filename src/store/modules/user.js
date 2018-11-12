@@ -1,6 +1,6 @@
-import { USER_LOGIN, USER_LOGOUT, USER_DOC_REF, UPDATE_PROFILE } from '../actions/user'
+import { USER_LOGIN, USER_LOGOUT, USER_DOC_REF, UPDATE_PROFILE, CREATE_PROFILE } from '../actions/user'
 import {CLEAR_ERROR, SET_LOADING, SET_ERROR} from '../actions/common'
-import {getInfo, withInfo} from '@/db/firebase/user'
+import {getInfo, withInfo, newInfo} from '@/db/firebase/user'
 import model from './models/user'
 
 export default {
@@ -52,9 +52,7 @@ export default {
             })
           } else {
             commit(SET_LOADING, false)
-            commit(USER_LOGIN, {
-              email: user.email
-            })
+            commit(USER_LOGIN, {})
           }
         })
         .catch(error => {
@@ -78,6 +76,21 @@ export default {
           commit(SET_LOADING, false)
           commit(SET_ERROR, error)
         })
+    },
+    [CREATE_PROFILE]: ({commit}, user) => {
+      commit(CLEAR_ERROR)
+      commit(SET_LOADING, true)
+      return newInfo().add(user)
+        .then((docRef) => {
+          commit(SET_LOADING, false)
+          commit(UPDATE_PROFILE, user)
+          commit(USER_DOC_REF, docRef.id)
+          return Promise.resolve()
+        })
+        .catch((error) => {
+          commit(SET_LOADING, false)
+          commit(SET_ERROR, error)
+        })
     }
   },
   mutations: {
@@ -93,6 +106,7 @@ export default {
     },
     [USER_LOGOUT]: (state) => {
       state.profile = {}
+      state.refId = null
       state.authenticated = false
     }
   }

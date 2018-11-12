@@ -7,3 +7,7 @@ export const getInfo = (uid) => {
 export const withInfo = (refId) => {
   return db.collection('users').doc(refId)
 }
+
+export const newInfo = () => {
+  return db.collection('users')
+}

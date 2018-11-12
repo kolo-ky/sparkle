@@ -15,15 +15,6 @@ export default {
       required: () => 'Поле не должно быть пустым'
     }
   },
-  email: {
-    title: 'Почта',
-    value: '',
-    validate: 'required|email',
-    rules: {
-      required: () => 'Поле не должно быть пустым',
-      email: () => 'Неверный email'
-    }
-  },
   bio: {
     title: 'О себе',
     value: '',

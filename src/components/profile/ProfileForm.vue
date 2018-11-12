@@ -1,21 +1,26 @@
 <template lang="pug">
-  v-card
-    v-form(@submit.prevent='onSave')
-      v-card-text(v-for='item in userData' :key='item.key')
-          v-text-field(
-            :label='item.title'
-            v-model='item.value'
-            type='text'
-            :name='item.key'
-            v-validate='item.validate'
-            :rules='(!errors.first(item.key)) ? [true] : [errors.first(item.key)]'
-            autocomplete="off"
-            @input.once='isEdit = true'
-          )
-      v-card-actions(m-4='')
-          v-btn(flat='' @click='switchToBack') Назад
-          v-spacer
-          v-btn(flat='' type='submit') Сохранить
+v-layout(row='' wrap='')
+  v-flex(xs12='' sm12='' md12='' lg2='' text-xs-center='' text-sm-center='')
+    v-avatar(size='150px')
+      img(src='https://avatars0.githubusercontent.com/u/9064066?v=4&s=460')
+  v-flex(xs12='' sm12='' md12='' lg10='' pt-4='')
+    v-card
+      v-form(@submit.prevent='onSave')
+        v-card-text(v-for='item in userData' :key='item.key')
+            v-text-field(
+              :label='item.title'
+              v-model='item.value'
+              type='text'
+              :name='item.key'
+              v-validate='item.validate'
+              :rules='(!errors.first(item.key)) ? [true] : [errors.first(item.key)]'
+              autocomplete="off"
+              @input.once='isEdit = true'
+            )
+        v-card-actions(m-4='')
+            v-btn(flat='' @click='switchToBack') Назад
+            v-spacer
+            v-btn(flat='' type='submit') Сохранить
 </template>
 
 <script>
