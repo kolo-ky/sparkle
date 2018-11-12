@@ -1,6 +1,6 @@
 import { USER_LOGIN, USER_LOGOUT, USER_DOC_REF, UPDATE_PROFILE, CREATE_PROFILE } from '../actions/user'
 import {CLEAR_ERROR, SET_LOADING, SET_ERROR} from '../actions/common'
-import {getInfo, withInfo, newInfo} from '@/db/firebase/user'
+import {getInfo, withInfo} from '@/db/firebase/user'
 import model from './models/user'
 
 export default {
