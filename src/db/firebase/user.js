@@ -4,10 +4,6 @@ export const getInfo = (uid) => {
   return db.collection('users').where('userId', '==', uid).get()
 }
 
-export const withInfo = (refId) => {
-  return db.collection('users').doc(refId)
-}
-
-export const newInfo = () => {
+export const withInfo = () => {
   return db.collection('users')
 }

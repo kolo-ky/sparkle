@@ -66,7 +66,7 @@ export default {
     [UPDATE_PROFILE]: ({commit, state}, user) => {
       commit(CLEAR_ERROR)
       commit(SET_LOADING, true)
-      return withInfo(state.refId).update(user)
+      return withInfo().doc(state.refId).update(user)
         .then(() => {
           commit(SET_LOADING, false)
           commit(UPDATE_PROFILE, user)
@@ -80,7 +80,7 @@ export default {
     [CREATE_PROFILE]: ({commit}, user) => {
       commit(CLEAR_ERROR)
       commit(SET_LOADING, true)
-      return newInfo().add(user)
+      return withInfo().add(user)
         .then((docRef) => {
           commit(SET_LOADING, false)
           commit(UPDATE_PROFILE, user)
