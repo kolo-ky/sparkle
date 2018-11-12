@@ -5,11 +5,13 @@
         v-layout
           h1 Профиль
       v-container(v-if="refId")
-        profile-list(v-if="!editView" :items='profileList' @handleSwitch='switchView')
-        profile-form(v-else :items='profileList' @handleSwitch='switchView' @handleSave='onSave')
+        transition(name='component-fade' mode="out-in")
+          profile-list(v-if="!editView" :items='profileList' @handleSwitch='switchView')
+          profile-form(v-else :items='profileList' @handleSwitch='switchView' @handleSave='onSave')
       v-container(v-else fill-height='')
-        empty-profile(v-if="!editView" @handleSwitch='switchView')
-        profile-form(v-else :items='profileList' @handleSwitch='switchView' @handleSave='onSave')
+        transition(name='component-fade' mode="out-in")
+          empty-profile(v-if="!editView" @handleSwitch='switchView')
+          profile-form(v-else :items='profileList' @handleSwitch='switchView' @handleSave='onSave')
     app-progress(v-else)
 </template>
 
@@ -20,6 +22,8 @@ import AppProgress from '@/components/Progress'
 import ProfileList from '@/components/profile/ProfileList'
 import ProfileForm from '@/components/profile/ProfileForm'
 import EmptyProfile from '@/components/profile/EmptyProfile'
+
+import '@/assets/animations/component.css'
 
 export default {
   name: 'Profile',
